@@ -26,15 +26,14 @@ This repository is the **cloud build target** for [DiaBo](https://github.com/ShT
 
 DiaBo is a native Android IDE that lets you write Java and XML directly on your phone. Its **Instant Preview** feature renders layouts approximately, on-device, with no compilation. Its **Real Build** feature goes further — it produces a 100%-accurate, real Android build. That accuracy requires an actual Gradle build and a real emulator, which isn't practical to run on a phone. This repository is where that work happens instead.
 
-```
-┌─────────────┐     workflow_dispatch      ┌──────────────────────────┐
-│  DiaBo App   │ ─────────────────────────▶ │  android-template (here)  │
-│ (on device)  │                             │   GitHub Actions runner   │
-└─────────────┘                             └──────────────────────────┘
-       ▲                                                  │
-       │         apk + screenshot artifacts               │
-       └──────────────────────────────────────────────────┘
-```
+┌─────────────┐ workflow_dispatch ┌──────────────────────────┐
+│ DiaBo App │ ─────────────────────────▶ │ android-template (here) │
+│ (on device) │ │ GitHub Actions runner │
+└─────────────┘ └──────────────────────────┘
+▲ │
+│ apk + screenshot artifacts │
+└──────────────────────────────────────────────────┘
+
 
 1. A DiaBo user opens a project's `.java` and `.xml` tabs and taps **▶ Real Build**.
 2. DiaBo base64-encodes both files and calls GitHub's REST API to dispatch
@@ -47,21 +46,20 @@ DiaBo is a native Android IDE that lets you write Java and XML directly on your 
 
 ## Repository Structure
 
-```
 android-template/
 ├── .github/workflows/
-│   └── diabo-preview-build.yml   # The pipeline DiaBo triggers
+│ └── diabo-preview-build.yml # The pipeline DiaBo triggers
 ├── app/
-│   ├── build.gradle               # Minimal dependencies (AppCompat, Material, ConstraintLayout, CardView, RecyclerView)
-│   └── src/main/
-│       ├── AndroidManifest.xml
-│       ├── java/com/diabo/preview/MainActivity.java   # Overwritten on every build
-│       └── res/layout/activity_main.xml                # Overwritten on every build
+│ ├── build.gradle # Minimal dependencies (AppCompat, Material, ConstraintLayout, CardView, RecyclerView)
+│ └── src/main/
+│ ├── AndroidManifest.xml
+│ ├── java/com/diabo/preview/MainActivity.java # Overwritten on every build
+│ └── res/layout/activity_main.xml # Overwritten on every build
 ├── build.gradle
 ├── settings.gradle
 ├── gradlew / gradlew.bat
 └── gradle/wrapper/
-```
+
 
 Only two files are ever touched by user-submitted code:
 `app/src/main/java/com/diabo/preview/MainActivity.java` and
