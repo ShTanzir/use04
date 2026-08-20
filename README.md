@@ -26,13 +26,18 @@ This repository is the **cloud build target** for [DiaBo](https://github.com/ShT
 
 DiaBo is a native Android IDE that lets you write Java and XML directly on your phone. Its **Instant Preview** feature renders layouts approximately, on-device, with no compilation. Its **Real Build** feature goes further — it produces a 100%-accurate, real Android build. That accuracy requires an actual Gradle build and a real emulator, which isn't practical to run on a phone. This repository is where that work happens instead.
 
-┌─────────────┐ workflow_dispatch ┌──────────────────────────┐
-│ DiaBo App │ ─────────────────────────▶ │ android-template (here) │
-│ (on device) │ │ GitHub Actions runner │
-└─────────────┘ └──────────────────────────┘
-▲ │
-│ apk + screenshot artifacts │
-└──────────────────────────────────────────────────┘
+```mermaid
+sequenceDiagram
+    participant D as 📱DiaBo App (on device)
+    participant G as ☁️android-template (GitHub Actions runner)
+
+    D->>G: workflow_dispatch (java_code_b64, xml_code_b64, build_id)
+    activate G
+    Note over G: Inject code, Gradle build, boot emulator, screenshot
+    G-->>D: apk-{build_id} + screenshot-{build_id}
+    deactivate G
+    Note over D: Show real screenshot, Install or Share APK
+```
 
 
 1. A DiaBo user opens a project's `.java` and `.xml` tabs and taps **▶ Real Build**.
