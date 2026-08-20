@@ -51,27 +51,34 @@ sequenceDiagram
 
 ## Repository Structure
 
+```
 android-template/
 ├── .github/
 │   └── workflows/
-│       └── diabo-preview-build.yml     ← Main GitHub Actions pipeline (core file)
+│       └── diabo-preview-build.yml     # The pipeline DiaBo triggers
+│
 ├── app/
-│   ├── build.gradle                     ← App module dependencies
+│   ├── build.gradle                     # Minimal deps: AppCompat, Material,
+│   │                                     # ConstraintLayout, CardView, RecyclerView
 │   └── src/main/
 │       ├── AndroidManifest.xml
 │       ├── java/com/diabo/preview/
-│       │   └── MainActivity.java        ← Seed file (auto-overwritten every build)
+│       │   └── MainActivity.java        # Overwritten on every build
 │       └── res/layout/
-│           └── activity_main.xml        ← Seed file (auto-overwritten every build)
+│           └── activity_main.xml        # Overwritten on every build
+│
 ├── gradle/
 │   └── wrapper/
 │       ├── gradle-wrapper.jar
 │       └── gradle-wrapper.properties
-├── build.gradle                          ← Root project config
+│
+├── build.gradle                          # Root project config
 ├── settings.gradle
-├── gradlew                                ← chmod +x already set
+├── gradlew
 ├── gradlew.bat
-└── README.md
+├── README.md
+└── LICENSE
+```
 
 
 Only two files are ever touched by user-submitted code:
