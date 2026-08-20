@@ -47,18 +47,26 @@ DiaBo is a native Android IDE that lets you write Java and XML directly on your 
 ## Repository Structure
 
 android-template/
-├── .github/workflows/
-│ └── diabo-preview-build.yml # The pipeline DiaBo triggers
+├── .github/
+│   └── workflows/
+│       └── diabo-preview-build.yml     ← Main GitHub Actions pipeline (core file)
 ├── app/
-│ ├── build.gradle # Minimal dependencies (AppCompat, Material, ConstraintLayout, CardView, RecyclerView)
-│ └── src/main/
-│ ├── AndroidManifest.xml
-│ ├── java/com/diabo/preview/MainActivity.java # Overwritten on every build
-│ └── res/layout/activity_main.xml # Overwritten on every build
-├── build.gradle
+│   ├── build.gradle                     ← App module dependencies
+│   └── src/main/
+│       ├── AndroidManifest.xml
+│       ├── java/com/diabo/preview/
+│       │   └── MainActivity.java        ← Seed file (auto-overwritten every build)
+│       └── res/layout/
+│           └── activity_main.xml        ← Seed file (auto-overwritten every build)
+├── gradle/
+│   └── wrapper/
+│       ├── gradle-wrapper.jar
+│       └── gradle-wrapper.properties
+├── build.gradle                          ← Root project config
 ├── settings.gradle
-├── gradlew / gradlew.bat
-└── gradle/wrapper/
+├── gradlew                                ← chmod +x already set
+├── gradlew.bat
+└── README.md
 
 
 Only two files are ever touched by user-submitted code:
